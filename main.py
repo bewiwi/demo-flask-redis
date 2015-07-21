@@ -25,10 +25,7 @@ redis = Redis(app)
 
 @app.route('/')
 def homepage():
-    count = redis.get(app.config['REDIS_KEY'])
-    if not count:
-        count = 1
-    redis.set(app.config['REDIS_KEY'], int(count) + 1)
+    count = redis.incr(app.config['REDIS_KEY'])
     return "Hi, I'm %s, this page has been seen %s times." % (
         platform.node(), count)
 

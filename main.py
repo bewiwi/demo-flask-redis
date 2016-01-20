@@ -26,7 +26,13 @@ redis = Redis(app)
 @app.route('/')
 def homepage():
     count = redis.incr(app.config['REDIS_KEY'])
-    return "Hi, I'm %s, this page has been seen %s times." % (
+    return """
+<html><head></head>
+<body><center>
+Hi, I\'m %s, this page has been seen %s times.<br />
+<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>
+</center></body></html>
+""" % (
         platform.node(), count)
 
 
